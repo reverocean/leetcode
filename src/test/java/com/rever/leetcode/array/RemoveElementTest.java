@@ -40,4 +40,50 @@ public class RemoveElementTest {
         int length = removeElement.removeElement(array, removeValue);
         assertThat(length, is(3));
     }
+
+    @Test
+    public void remove_duplicate_element_in_a_sorted_array_should_return_0_when_the_given_array_is_empty(){
+        int[] array = new int[]{};
+
+        int length = removeElement.removeDuplicate(array);
+
+        assertThat(length, is(0));
+    }
+
+    @Test
+    public void remove_duplicate_element_in_a_sorted_array_should_return_1_when_the_given_array_only_one_element(){
+        int[] array = new int[]{1};
+
+        int length = removeElement.removeDuplicate(array);
+
+        assertThat(length, is(1));
+    }
+
+
+    @Test
+    public void remove_duplicate_element_in_a_sorted_array_should_return_same_length_when_the_given_array_has_not_duplicate_element(){
+        int[] array = new int[]{1, 2, 3};
+
+        int length = removeElement.removeDuplicate(array);
+
+        assertThat(length, is(3));
+    }
+
+    @Test
+    public void remove_duplicate_element_in_a_sorted_array_should_return_2_when_the_given_array_has_duplicate_element(){
+        int[] array = new int[]{1, 1, 2};
+
+        int length = removeElement.removeDuplicate(array);
+
+        assertThat(length, is(2));
+    }
+
+    @Test
+    public void remove_duplicate_element_in_a_sorted_array_should_return_1_when_the_given_array_has_same_elements(){
+        int[] array = new int[]{1, 1, 1};
+
+        int length = removeElement.removeDuplicate(array);
+
+        assertThat(length, is(1));
+    }
 }
