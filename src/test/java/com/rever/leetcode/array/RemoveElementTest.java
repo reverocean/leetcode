@@ -86,4 +86,49 @@ public class RemoveElementTest {
 
         assertThat(length, is(1));
     }
+
+    @Test
+    public void remove_more_than_twice_duplicate_element_in_a_sorted_array_should_return_0_when_the_given_array_is_empty(){
+        int[] array = new int[]{};
+
+        int length = removeElement.removeMoreThanTwiceDuplicate(array);
+
+        assertThat(length, is(0));
+    }
+
+    @Test
+    public void remove_more_than_twice_duplicate_element_in_a_sorted_array_should_return_1_when_the_given_array_has_1_element(){
+        int[] array = new int[]{1};
+
+        int length = removeElement.removeMoreThanTwiceDuplicate(array);
+
+        assertThat(length, is(1));
+    }
+
+    @Test
+    public void remove_more_than_twice_duplicate_element_in_a_sorted_array_should_return_2_when_the_given_array_has_2_duplicate_elements(){
+        int[] array = new int[]{1, 1};
+
+        int length = removeElement.removeMoreThanTwiceDuplicate(array);
+
+        assertThat(length, is(2));
+    }
+
+    @Test
+    public void remove_more_than_twice_duplicate_element_in_a_sorted_array_should_return_2_when_the_given_array_has_3_duplicate_elements(){
+        int[] array = new int[]{1, 1, 1};
+
+        int length = removeElement.removeMoreThanTwiceDuplicate(array);
+
+        assertThat(length, is(2));
+    }
+
+    @Test
+    public void remove_more_than_twice_duplicate_element_in_a_sorted_array_should_return_5_when_the_given_array_has_3_duplicate_elements_2_duplicate_elements(){
+        int[] array = new int[]{1, 1, 1, 2, 2, 3};
+
+        int length = removeElement.removeMoreThanTwiceDuplicate(array);
+
+        assertThat(length, is(5));
+    }
 }
