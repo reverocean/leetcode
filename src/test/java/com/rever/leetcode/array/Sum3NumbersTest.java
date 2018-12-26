@@ -21,6 +21,16 @@ public class Sum3NumbersTest {
         assertThat(result.isEmpty(), is(true));
     }
 
+
+    @Test
+    public void threeSumEqual0_should_return_emtpy_when_the_given_array_have_not_sub_array_sum_equals_0() {
+        int[] array = new int[]{1, 2, 3};
+
+        List<int[]> result = sum3Numbers.threeSumEqual0(array);
+
+        assertThat(result.isEmpty(), is(true));
+    }
+
     @Test
     public void threeSumEqual0_should_return_sorted_three_elements_the_sum_of_them_equal_to_0_when_the_given_array() {
         int[] array = new int[]{-2, -1, 3};
@@ -44,6 +54,15 @@ public class Sum3NumbersTest {
     }
 
     @Test
+    public void threeSumEqual0Simple_should_return_emtpy_when_the_given_array_have_not_sub_array_sum_equals_0() {
+        int[] array = new int[]{1, 2, 3};
+
+        List<int[]> result = sum3Numbers.threeSumEqual0Simple(array);
+
+        assertThat(result.isEmpty(), is(true));
+    }
+
+    @Test
     public void threeSumEqual0Simple_should_return_sorted_three_elements_the_sum_of_them_equal_to_0_when_the_given_array() {
         int[] array = new int[]{-2, -1, 3};
 
@@ -53,7 +72,6 @@ public class Sum3NumbersTest {
         int[] elements = result.get(0);
 
         assertThat(elements, equalTo(new int[]{-2, -1, 3}));
-
     }
 
 
