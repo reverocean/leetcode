@@ -6,13 +6,13 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class RectangleTest {
+public class HistogramTest {
 
-    private final Rectangle rectangle = new Rectangle();
+    private final Histogram histogram = new Histogram();
 
     @Test
     public void largestRectangle() {
-        int largestRectangle = rectangle.largestRectangle(newArrayList(2, 1, 5, 6, 2, 3));
+        int largestRectangle = histogram.largestRectangle(newArrayList(2, 1, 5, 6, 2, 3));
 
         assertThat(largestRectangle, is(10));
     }
