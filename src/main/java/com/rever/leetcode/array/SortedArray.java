@@ -1,6 +1,49 @@
 package com.rever.leetcode.array;
 
 public class SortedArray {
+
+    public int[] searchRangeNew(int[] array, int target) {
+        int[] notFoundResult = {-1, -1};
+        int length = array.length;
+        if (length == 0) {
+            return notFoundResult;
+        }
+
+        int[] result = new int[2];
+        int low = 0;
+        int high = length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (array[mid] >= target) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        if (low < length && array[low] == target) {
+            result[0] = low;
+        } else {
+            return notFoundResult;
+        }
+        high = length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (array[mid] <= target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        result[1] = high;
+
+        return result;
+    }
+
     public int[] searchRange(int[] array, int target) {
         int[] notFoundResult = {-1, -1};
         if (array.length == 0) {
@@ -40,13 +83,12 @@ public class SortedArray {
     }
 
     private int searchIndex(int[] array, int start, int end, int target) {
-        int currentIndex = 0;
+        int currentIndex = start + (end - start) / 2;
 
-        while (start <= end - 1) {
-            if (currentIndex == (start + end) / 2) {
+        while (start < end && currentIndex > start) {
+            if (currentIndex == start) {
                 break;
             }
-            currentIndex = (start + end) / 2;
             if (target < array[currentIndex]) {
                 end = currentIndex;
             } else if (target > array[currentIndex]) {
@@ -54,6 +96,7 @@ public class SortedArray {
             } else {
                 return currentIndex;
             }
+            currentIndex = start + (end - start) / 2;
         }
 
         return -1;
