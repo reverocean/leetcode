@@ -2,6 +2,30 @@ package com.rever.leetcode.array;
 
 public class SortedArray {
 
+    public int findIndexOrInsertIndex(int[] array, int element) {
+        if (array.length == 0) {
+            return -1;
+        }
+
+        int start = 0;
+        int end = array.length - 1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (array[mid] == element) {
+                return mid;
+            }
+
+            if (array[mid] < element) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        return start;
+    }
+
     public int[] searchRangeNew(int[] array, int target) {
         int[] notFoundResult = {-1, -1};
         int length = array.length;
