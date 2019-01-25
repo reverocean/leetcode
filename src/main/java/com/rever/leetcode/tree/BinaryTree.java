@@ -1,9 +1,8 @@
 package com.rever.leetcode.tree;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -36,6 +35,19 @@ public class BinaryTree {
         int rightDepth = getMinDepth(right);
 
         return 1 + Math.min(leftDepth, rightDepth);
+    }
+
+
+    public int[] generateTree(int[] inOrders, int[] postOrders) {
+        if (inOrders.length == 0 && postOrders.length == 0) {
+            return new int[]{};
+        }
+
+        Node tree = generateTreeNew(inOrders, postOrders);
+
+        List<Integer> list = preOrderTraversal(tree);
+        list.add(0, tree.getValue());
+        return toArray(list);
     }
 
     private Node generateTreeNew(int[] inOrders, int[] postOrders) {
@@ -90,18 +102,6 @@ public class BinaryTree {
         return tree;
     }
 
-    public int[] generateTree(int[] inOrders, int[] postOrders) {
-        if (inOrders.length == 0 && postOrders.length == 0) {
-            return new int[]{};
-        }
-
-        Node tree = generateTreeNew(inOrders, postOrders);
-
-        List<Integer> list = preOrderTraversal(tree);
-        list.add(0, tree.getValue());
-        return toArray(list);
-    }
-
     private List<Integer> preOrderTraversal(Node tree) {
         if (tree == null) {
             return Collections.emptyList();
@@ -122,11 +122,32 @@ public class BinaryTree {
         return result;
     }
 
-    private List<Integer> toList(int[] array) {
-        return Arrays.stream(array).boxed().collect(Collectors.toList());
-    }
-
     private int[] toArray(List<Integer> list) {
         return list.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    public int[][] traversalByLevel(Node tree) {
+
+        if (tree == null) {
+            return new int[][]{};
+        }
+
+        ArrayList<List<Integer>> result1 = newArrayList();
+        traversalByLevelRecursive(result1, tree, 0);
+        return result1.stream().map(this::toArray).toArray(int[][]::new);
+    }
+
+    private void traversalByLevelRecursive(List<List<Integer>> result, Node tree, int level) {
+        if (tree == null) {
+            return;
+        }
+
+        if (result.size() <= level) {
+            result.add(newArrayList());
+        }
+        result.get(level).add(tree.getValue());
+
+        traversalByLevelRecursive(result, tree.getLeft(), level + 1);
+        traversalByLevelRecursive(result, tree.getRight(), level + 1);
     }
 }
